@@ -23,7 +23,10 @@
                         <div class="col-xl-12">
                             <div class="auth-form">
                                 <div class="text-center mb-3">
-                                    <a href="index.html"><img src="/images/logo-full.png"  alt=""></a>
+                                    <a href="#">
+                                        {{--<img src="/images/logo-full.png"  alt="">--}}
+                                        {{config('app.name')}}
+                                    </a>
                                 </div>
                                 <h4 class="text-center mb-4 text-white">Login</h4>
                                 <form action="{{route('login')}}" method="post">
