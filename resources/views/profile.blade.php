@@ -21,7 +21,7 @@
                     </div>
                     <div class="profile-info">
                         <div class="profile-photo">
-                            <img src="/images/profile/profile.png" class="img-fluid rounded-circle" alt="">
+                            <img src="{{$assets["user"]["profile_image"]}}" class="img-fluid rounded-circle" alt="">
                         </div>
                         <div class="profile-details">
                             <div class="profile-name px-3 pt-2">
@@ -70,14 +70,14 @@
                             @foreach($user->getDriverVehicles as $vehicle)
                                 <div class="media pt-3 pb-3">
                                     <img
-                                        src="/images/profile/5.jpg"
+                                        src="{{$assets["user"]["profile_image"]}}"
                                         alt="image"
                                         class="mr-3 rounded"
                                         width="75"
                                     >
                                     <div class="media-body">
                                         <h5 class="m-b-5">
-                                            <a href="post-details.html" class="text-black">{{$vehicle->brand ?? ''}} {{$vehicle->model ?? ''}}</a>
+                                            <a href="#" class="text-black">{{$vehicle->brand ?? ''}} {{$vehicle->model ?? ''}}</a>
                                         </h5>
                                         <p class="mb-0">{{$vehicle->plate_number ?? ''}}</p>
                                     </div>
@@ -92,6 +92,18 @@
         <div class="col-xl-8">
             <div class="card">
                 <div class="card-body">
+                    <div class="btn-group float-right" role="group">
+                        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Account Operations</button>
+                        <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 56px, 0px);">
+                            @if($user->confirmed == 0 && $user->declined == 0)
+                                <a class="dropdown-item text-danger modal-action" data-toggle="modal" data-target="#profileActionModal" data-action="decline" href="javascript:void()">Decline</a>
+                                <a class="dropdown-item text-primary modal-action" data-toggle="modal" data-target="#profileActionModal" data-action="approve" href="javascript:void()">Approve</a>
+                            @endif
+                                <a class="dropdown-item text-warning modal-action" data-toggle="modal" data-target="#profileActionModal" data-action="suspend" href="javascript:void()">Suspend</a>
+                                <a class="dropdown-item modal-action" data-toggle="modal" data-target="#profileActionModal" data-action="ban" href="javascript:void()">Ban</a>
+                                <a class="dropdown-item text-success modal-action" data-toggle="modal" data-target="#profileActionModal" data-action="activate" href="javascript:void()">Activate</a>
+                        </div>
+                    </div>
                     <div class="profile-tab">
                         <div class="custom-tab-1">
                             <ul class="nav nav-tabs">
@@ -411,4 +423,78 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('dialog-section')
+    <div class="modal fade" id="profileActionModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="profileActionModalLabel"></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p id="textId"></p>
+                    <input type="hidden" id="actionType">
+                    <input type="hidden" id="user" value="{{$user->id}}">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+@endsection
+
+@section('extra-scripts')
+    <script>
+        $(document).ready(function(){
+            $(document).on('click', '.modal-action', function(e){
+                e.preventDefault();
+                var action = $(this).data('action');
+                var title = '';
+                var text = '';
+                switch(action){
+                    case 'decline':
+                        title = "Decline Application";
+                        $('#profileActionModalLabel').text(title);
+                        text = "Are you sure you want to decline this application?";
+                        $('#textId').text(text);
+                        $('#actionType').val('decline');
+                    break;
+                    case 'approve':
+                        title = "Approve Application";
+                        $('#profileActionModalLabel').text(title);
+                        text = "Are you sure you want to approve this application?";
+                        $('#textId').text(text);
+                        $('#actionType').val('approve');
+                    break;
+                    case 'suspend':
+                        title = "Suspend Account";
+                        $('#profileActionModalLabel').text(title);
+                        text = "Are you sure you want to suspend this account?";
+                        $('#textId').text(text);
+                        $('#actionType').val('suspend');
+                    break;
+                    case 'ban':
+                        title = "Ban Account";
+                        $('#profileActionModalLabel').text(title);
+                        text = "Are you sure you want to ban this account?";
+                        $('#textId').text(text);
+                        $('#actionType').val('ban');
+                    break;
+                    case 'activate':
+                        title = "Activate Account";
+                        $('#profileActionModalLabel').text(title);
+                        text = "Are you sure you want to activate this account?";
+                        $('#textId').text(text);
+                        $('#actionType').val('activate');
+                    break;
+                }
+            });
+        });
+    </script>
 @endsection

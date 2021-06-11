@@ -17,9 +17,11 @@ class UserController extends Controller
     }
 
     public function userDetail($id){
-        $user = $this->user->getUserById($id);
-        if(!empty($user)){
-            return view('profile',['user'=>$user]);
+        $assets =  $this->user->getUserById($id);
+        //return dd($user["user"]["user_type"]);
+        //return dd($assets);
+        if(!empty($assets)){
+            return view('profile',['assets'=>$assets, 'user'=>$this->user->getUserOnlyById($id)]);
         }else{
             session()->flash("error", "Whoops! No record found.");
             return back();

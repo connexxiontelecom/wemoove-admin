@@ -169,6 +169,7 @@
         </div>
 
     </div>
+    @yield('dialog-section')
    @include('partials._footer-note')
 </div>
 @include('partials._footer-scripts')

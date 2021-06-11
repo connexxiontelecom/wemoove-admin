@@ -40,10 +40,13 @@
                                     <td>
                                         @switch($driver->status)
                                             @case(0)
-                                            Suspended
+                                            Active
                                             @break
                                             @case(1)
-                                            Active
+                                            Suspended
+                                            @break
+                                            @case(2)
+                                            Banned
                                             @break
                                         @endswitch
                                     </td>

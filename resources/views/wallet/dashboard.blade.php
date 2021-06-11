@@ -101,8 +101,8 @@
                                     <tr>
                                         <th>S/No.</th>
                                         <th>Name</th>
-                                        <th>Amount</th>
-                                        <th>Type</th>
+                                        <th>Debit</th>
+                                        <th>Credit</th>
                                         <th>Narration</th>
                                     </tr>
                                     </thead>
@@ -114,8 +114,8 @@
                                         <tr>
                                             <td>{{$serial++}}</td>
                                             <td>{{$wall->getUser->full_name ?? ''}}</td>
-                                            <td>{{$wall->credit > 0 ? number_format($wall->credit,2) : number_format($wall->debit,2)}}</td>
-                                            <td>{{$wall->credit > 0 ? 'Credit' : 'Debit'}}</td>
+                                            <td class="text-right">{{$wall->debit > 0 ? number_format($wall->debit,2) : '-'}}</td>
+                                            <td class="text-right">{{$wall->credit > 0 ? number_format($wall->credit,2) : '-'}}</td>
                                             <td>{{$wall->narration ?? '-'}}</td>
                                         </tr>
                                     @endforeach
@@ -124,8 +124,8 @@
                                     <tr>
                                         <th>S/No.</th>
                                         <th>Name</th>
-                                        <th>Amount</th>
-                                        <th>Type</th>
+                                        <th>Debit</th>
+                                        <th>Credit</th>
                                         <th>Narration</th>
                                     </tr>
                                     </tfoot>

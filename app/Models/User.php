@@ -64,11 +64,35 @@ class User extends Authenticatable
         return User::where('user_type',1)->orderBy('full_name', 'ASC')->get();
     }
 
+    public function getAllPotentialDrivers(){
+        return User::where('confirmed',0)->where('declined',0)->orderBy('full_name', 'ASC')->get();
+    }
+
     public function getAllPassengers(){
         return User::where('user_type',0)->orderBy('full_name', 'ASC')->get();
     }
 
     public function getUserById($id){
+        //return User::find($id);
+
+        $client = new \GuzzleHttp\Client();
+        $request = $client->get('http://wemove.cnx247.com/api/fetchuser/'.$id);
+        //$response = $request->getBody();
+        $result = json_decode($request->getBody()->getContents(), true);
+        //http://wemove.cnx247.com/api/fetchuser
+        return $result;
+
+    }
+
+    public function getCarsByDriverId($id){
+        $client = new \GuzzleHttp\Client();
+        $request = $client->get('http://wemove.cnx247.com/api/fetchcars/'.$id);
+        //$response = $request->getBody();
+        $result = json_decode($request->getBody()->getContents(), true);
+        return $result;
+    }
+
+    public function getUserOnlyById($id){
         return User::find($id);
     }
 }

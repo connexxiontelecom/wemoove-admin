@@ -22,7 +22,7 @@ class DriverController extends Controller
         return view('driver.index', ['drivers'=>$drivers]);
     }
     public function newRegistrations(){
-        $drivers = $this->driver->getAllDrivers();
+        $drivers = $this->driver->getAllPotentialDrivers();
         return view('driver.new-registrations', ['drivers'=>$drivers]);
     }
 }
