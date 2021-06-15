@@ -428,7 +428,7 @@
 @section('dialog-section')
     <div class="modal fade" id="profileActionModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
-            <div class="modal-content">
+            <form class="modal-content" method="post" action="{{route('update-account-status')}}">
                 <div class="modal-header">
                     <h5 class="modal-title" id="profileActionModalLabel"></h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -437,13 +437,15 @@
                 </div>
                 <div class="modal-body">
                     <p id="textId"></p>
-                    <input type="hidden" id="actionType">
-                    <input type="hidden" id="user" value="{{$user->id}}">
+                        @csrf
+                        <input type="hidden" id="actionType" name="action">
+                        <input type="hidden" id="user" value="{{$user->id}}" name="user">
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
+                    <button type="submit" class="btn btn-primary">Save changes</button>
                 </div>
+            </form>
             </div>
         </div>
     </div>

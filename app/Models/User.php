@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Http\Request;
 use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
@@ -94,5 +95,32 @@ class User extends Authenticatable
 
     public function getUserOnlyById($id){
         return User::find($id);
+    }
+
+    public function updateUserAccountStatus(Request $request){
+        $user = User::find($request->user);
+        switch($request->action){
+            case 'decline':
+                $user->status = 2;
+                $user->save();
+            break;
+            case 'ban':
+                $user->status = 3;
+                $user->save();
+            break;
+            case 'activate':
+                $user->status = 1;
+                $user->save();
+            break;
+            case 'suspend':
+                $user->status = 4;
+                $user->save();
+            break;
+            case 'approve':
+                $user->status = 0;
+                $user->save();
+            break;
+        }
+
     }
 }

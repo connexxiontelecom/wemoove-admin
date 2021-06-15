@@ -36,6 +36,7 @@ Route::prefix('rides')->group(function(){
 
 #User routes
 Route::get('/user/detail/{id}', [App\Http\Controllers\Backend\UserController::class, 'userDetail'])->name('user-detail');
+Route::post('/user/update-account-status',[App\Http\Controllers\Backend\UserController::class, 'updateAccountStatus'])->name('update-account-status');
 
 
 #Driver routes
@@ -55,6 +56,7 @@ Route::prefix('transactions')->group(function(){
     Route::get('/', [App\Http\Controllers\Backend\WalletController::class, 'walletDashboard'])->name('wallet-dashboard');
     Route::get('/credit-wallet', [App\Http\Controllers\Backend\WalletController::class, 'creditWallet'])->name('credit-wallet');
     Route::post('/credit-wallet', [App\Http\Controllers\Backend\WalletController::class, 'storeCreditWallet']);
+    //Route::get('/payout-requests', )->name('payout-requests');
 });
 
 Route::prefix('policy')->group(function(){

@@ -27,4 +27,14 @@ class UserController extends Controller
             return back();
         }
     }
+
+    public function updateAccountStatus(Request $request){
+        $this->validate($request,[
+            'user'=>'required',
+            'action'=>'required'
+        ]);
+        $this->user->updateUserAccountStatus($request);
+        session()->flash("success", "<strong>Success!</strong> Account ".$request->action);
+        return back();
+    }
 }
