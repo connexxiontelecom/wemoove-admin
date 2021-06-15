@@ -57,6 +57,12 @@ Route::prefix('transactions')->group(function(){
     Route::post('/credit-wallet', [App\Http\Controllers\Backend\WalletController::class, 'storeCreditWallet']);
 });
 
+Route::prefix('policy')->group(function(){
+    Route::get('/bank-setup', [App\Http\Controllers\Backend\BankController::class, 'bankSetup'])->name('bank-setup');
+    Route::post('/bank-setup', [App\Http\Controllers\Backend\BankController::class, 'storeBank']);
+    Route::post('/update-bank-name', [App\Http\Controllers\Backend\BankController::class, 'updateBank'])->name('update-bank-name');
+});
+
 #Administration routes
 Route::get('/administration/all-admin-users', [App\Http\Controllers\Backend\AdminUserController::class, 'allUsers'])->name('all-admin-users');
 Route::get('/administration/new-admin-user', [App\Http\Controllers\Backend\AdminUserController::class, 'showAddNewUserForm'])->name('add-new-admin-user');

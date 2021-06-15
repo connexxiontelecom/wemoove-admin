@@ -52,6 +52,7 @@
                 </a>
                 <ul aria-expanded="false">
                     <li><a href="#">Charge</a></li>
+                    <li><a href="{{route('bank-setup')}}">Bank Setup</a></li>
                 </ul>
             </li>
             <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
