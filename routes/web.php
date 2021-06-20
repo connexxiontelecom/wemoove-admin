@@ -56,10 +56,13 @@ Route::prefix('transactions')->group(function(){
     Route::get('/', [App\Http\Controllers\Backend\WalletController::class, 'walletDashboard'])->name('wallet-dashboard');
     Route::get('/credit-wallet', [App\Http\Controllers\Backend\WalletController::class, 'creditWallet'])->name('credit-wallet');
     Route::post('/credit-wallet', [App\Http\Controllers\Backend\WalletController::class, 'storeCreditWallet']);
-    //Route::get('/payout-requests', )->name('payout-requests');
+    Route::get('/payout-requests', [App\Http\Controllers\Backend\WalletController::class, 'showPayoutRequests'])->name('payout-requests');
+    Route::get('/payout-requests/{requestid}', [App\Http\Controllers\Backend\WalletController::class, 'viewPayoutRequest'])->name('view-payout-request');
+    Route::post('/process-payout-request', [App\Http\Controllers\Backend\WalletController::class, 'processPayoutRequest'])->name('process-payout-request');
 });
 
 Route::prefix('policy')->group(function(){
+    Route::get('/', [App\Http\Controllers\Backend\PolicyController::class, 'policySettings'])->name('policy-settings');
     Route::get('/bank-setup', [App\Http\Controllers\Backend\BankController::class, 'bankSetup'])->name('bank-setup');
     Route::post('/bank-setup', [App\Http\Controllers\Backend\BankController::class, 'storeBank']);
     Route::post('/update-bank-name', [App\Http\Controllers\Backend\BankController::class, 'updateBank'])->name('update-bank-name');

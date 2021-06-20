@@ -42,16 +42,16 @@
                     <li><a href="{{route('credit-wallet')}}">Credit Wallet</a></li>
                     <li><a href="#">Refund</a></li>
                     <li><a href="#">Promo</a></li>
-                    <li><a href="#">Payout</a></li>
+                    <li><a href="{{route('payout-requests')}}">Payout</a></li>
 
                 </ul>
             </li>
-            <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
+            <li><a class="has-arrow ai-icon" href="javascript:void(0);" aria-expanded="false">
                     <i class="flaticon-381-internet"></i>
                     <span class="nav-text">Policy</span>
                 </a>
                 <ul aria-expanded="false">
-                    <li><a href="#">Charge</a></li>
+                    <li><a href="{{route('policy-settings')}}">Setting</a></li>
                     <li><a href="{{route('bank-setup')}}">Bank Setup</a></li>
                 </ul>
             </li>

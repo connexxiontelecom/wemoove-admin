@@ -86,4 +86,8 @@ class Wallet extends Model
         //Close request
         curl_close($ch);
     }
+
+    public function getUserWalletTransactionsByUserId($id){
+        return Wallet::where('user_id', $id)->orderBy('id', 'DESC')->get();
+    }
 }
