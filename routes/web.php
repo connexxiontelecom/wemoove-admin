@@ -63,9 +63,16 @@ Route::prefix('transactions')->group(function(){
 
 Route::prefix('policy')->group(function(){
     Route::get('/', [App\Http\Controllers\Backend\PolicyController::class, 'policySettings'])->name('policy-settings');
+    Route::post('/', [App\Http\Controllers\Backend\PolicyController::class, 'processPolicySettings']);
     Route::get('/bank-setup', [App\Http\Controllers\Backend\BankController::class, 'bankSetup'])->name('bank-setup');
     Route::post('/bank-setup', [App\Http\Controllers\Backend\BankController::class, 'storeBank']);
     Route::post('/update-bank-name', [App\Http\Controllers\Backend\BankController::class, 'updateBank'])->name('update-bank-name');
+});
+
+Route::prefix('/support')->group(function(){
+    Route::get('/categories', [App\Http\Controllers\Backend\SupportController::class, 'showSupportCategories'])->name('support-categories');
+    Route::post('/categories', [App\Http\Controllers\Backend\SupportController::class, 'setSupportName']);
+    Route::post('/update-category-name', [App\Http\Controllers\Backend\SupportController::class, 'updateSupportName'])->name('update-category-name');
 });
 
 #Administration routes

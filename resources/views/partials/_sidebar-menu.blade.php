@@ -55,6 +55,15 @@
                     <li><a href="{{route('bank-setup')}}">Bank Setup</a></li>
                 </ul>
             </li>
+            <li><a class="has-arrow ai-icon" href="javascript:void(0);" aria-expanded="false">
+                    <i class="flaticon-381-internet"></i>
+                    <span class="nav-text">Support</span>
+                </a>
+                <ul aria-expanded="false">
+                    <li><a href="{{route('support-categories')}}">Category</a></li>
+                    <li><a href="{{route('bank-setup')}}">All Requests</a></li>
+                </ul>
+            </li>
             <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
                     <i class="flaticon-381-internet"></i>
                     <span class="nav-text">Administration</span>

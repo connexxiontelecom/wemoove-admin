@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use App\Models\PayoutRequest;
+use App\Models\PolicySetting;
 use App\Models\User;
 use App\Models\Wallet;
 use Illuminate\Http\Request;
@@ -16,6 +17,7 @@ class WalletController extends Controller
         $this->users = new User();
         $this->wallet = new Wallet();
         $this->payout = new PayoutRequest();
+        $this->policysettings = new PolicySetting();
         $this->middleware('auth');
     }
 
@@ -51,7 +53,8 @@ class WalletController extends Controller
             $wallet = $this->wallet->getUserWalletTransactionsByUserId($payout->user_id);
             return view('wallet.view-payout-request',[
                 'payout'=>$this->payout->getPayoutRequestById($id),
-                'wallet'=>$wallet
+                'wallet'=>$wallet,
+                'policysettings'=>$this->policysettings->getPolicySettings()
                 ]);
         }else{
             session()->flash("error", "<strong>Whoops!</strong> No record found.");

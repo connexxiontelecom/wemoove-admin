@@ -27,10 +27,10 @@
                             </button>
                         </div>
                     @endif
-                        @if(($wallet->sum('credit') - $wallet->sum('debit')) <= 0 )
+                        @if(($wallet->sum('credit') - $wallet->sum('debit')) < $policysettings->minimum_threshold )
                         <div class="alert alert-warning alert-dismissible fade show">
                             <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="mr-2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
-                            <strong>Whoops!</strong> Your current balance is less than our minimum threshold.
+                            <strong>Whoops!</strong> Your current balance is less than our minimum threshold of <strong>{{number_format($policysettings->minimum_threshold,2)}}</strong>
                             <button type="button" class="close h-100" data-dismiss="alert" aria-label="Close"><span><i class="mdi mdi-close"></i></span>
                             </button>
                         </div>
@@ -107,7 +107,7 @@
                                                             <div class="form-group d-flex justify-content-center">
                                                                 <div class="btn-group">
                                                                     <a href="{{url()->previous()}}" class="btn btn-secondary btn-sm text-white">Cancel</a>
-                                                                    @if($payout->action_type == 0 && ($wallet->sum('credit') - $wallet->sum('debit')) > 0 )
+                                                                    @if($payout->action_type == 0 && ($wallet->sum('credit') - $wallet->sum('debit')) >= $policysettings->minimum_threshold )
                                                                         <button class="btn btn-primary btn-sm">Submit</button>
                                                                     @endif
                                                                 </div>
