@@ -18,6 +18,7 @@ class CreateAdminUsersTable extends Migration
             $table->string('first_name');
             $table->string('surname')->nullable();
             $table->string('email')->unique();
+            $table->string('username')->nullable();
             $table->string('mobile_no')->nullable();
             $table->integer('gender')->default(1)->comment('1=male,2=female');
             $table->string('address')->nullable();
