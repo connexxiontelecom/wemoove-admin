@@ -28,7 +28,8 @@ class AdminUserController extends Controller
         $this->validate($request,[
             'email'=>'required|unique:admin_users,email',
             'first_name'=>'required',
-            'surname'=>'required'
+            'surname'=>'required',
+            'username'=>'required|unique:admin_users,username'
         ]);
         $this->adminuser->setNewAdminUser($request);
         session()->flash("success", "<strong>Success!</strong> New admin user registered");

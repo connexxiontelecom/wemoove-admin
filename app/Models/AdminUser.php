@@ -32,6 +32,7 @@ class AdminUser extends Authenticatable
         $user->email = $request->email ?? '';
         $user->mobile_no = $request->mobile_no ?? '';
         $user->password = bcrypt('password123');
+        $user->username = $request->username;
         $user->save();
         //$this->log->registerNewActivity(Auth::user()->id, 'New admin registration', 'Registered new admin user');
 

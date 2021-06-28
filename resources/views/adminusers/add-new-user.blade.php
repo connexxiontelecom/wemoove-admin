@@ -31,6 +31,14 @@
                 <div class="basic-form">
                     <form action="{{route('add-new-admin-user')}}" method="post">
                         @csrf
+                        <div class="row mb-2">
+                            <div class="col-sm-6">
+                                <input type="text" name="username" value="{{old('username')}}" class="form-control" placeholder="Username">
+                                @error('username')
+                                <i class="text-danger">{{$message}}</i>
+                                @enderror
+                            </div>
+                        </div>
                         <div class="row">
                             <div class="col-sm-6">
                                 <input type="text" name="first_name" value="{{old('first_name')}}" class="form-control" placeholder="First name">
