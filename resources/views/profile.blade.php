@@ -33,7 +33,7 @@
                                 @endif
                             </div>
                             <div class="profile-email px-2 pt-2">
-                                <h4 class="text-muted mb-0">{{$user->email ?? ''}}</h4>
+                                <h4 class="text-muted mb-0">{{$user->email ?? ''}} </h4>
                             </div>
                         </div>
                     </div>
@@ -145,6 +145,16 @@
                                             </div>
                                             <div class="col-9">
                                                 <span>{{$user->phone_number ?? ''}}</span>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-4 mb-sm-2">
+                                            <div class="col-sm-3">
+                                                <h5 class="f-w-500">Account status
+                                                    <span class="pull-right d-none d-sm-block">:</span>
+                                                </h5>
+                                            </div>
+                                            <div class="col-9">
+                                                <span>{!! $user->status == 0 ? "<sup class='badge badge-success'>Active</span>" : "<sup class='badge badge-warning text-white'>Inactive</span>" !!}</span>
                                             </div>
                                         </div>
                                         <div class="row mb-4 mb-sm-2">
