@@ -181,11 +181,11 @@
                                                                                 <th>Ride</th>
                                                                             </tr>
                                                                             @php
-                                                                                $serial = 1;
+                                                                                $s = 1;
                                                                             @endphp
                                                                             @foreach($ride->getRidePassengers as $pass)
                                                                                 <tr>
-                                                                                    <td>{{$serial++}}</td>
+                                                                                    <td>{{$s++}}</td>
                                                                                     <td>{{$pass->getUser->full_name ?? ''}}</td>
                                                                                     <td>{{$pass->pickup ?? ''}}</td>
                                                                                     <td>{{$pass->request_status ?? ''}}</td>
