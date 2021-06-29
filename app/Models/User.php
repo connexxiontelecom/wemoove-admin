@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Http\Request;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Auth;
 
 class User extends Authenticatable
 {
@@ -101,15 +102,18 @@ class User extends Authenticatable
         $user = User::find($request->user);
         switch($request->action){
             case 'decline':
-                $user->status = 2;
+                $user->status = 2; //ban
+                $user->declined = 1;
+                $user->declined_by = Auth::user()->id;
+                $user->declined_date = now();
                 $user->save();
             break;
             case 'ban':
-                $user->status = 3;
+                $user->status = 3; //
                 $user->save();
             break;
             case 'activate':
-                $user->status = 1;
+                $user->status = 1; //suspended
                 $user->save();
             break;
             case 'suspend':
@@ -117,7 +121,10 @@ class User extends Authenticatable
                 $user->save();
             break;
             case 'approve':
-                $user->status = 0;
+                $user->status = 0; //active
+                $user->confirmed = 1;
+                $user->confirmed_by = Auth::user()->id;
+                $user->confirmed_date = now();
                 $user->save();
             break;
         }

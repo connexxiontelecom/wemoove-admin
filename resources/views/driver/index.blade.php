@@ -23,6 +23,7 @@
                         <table id="example" class="display table-responsive-md">
                             <thead>
                             <tr>
+                                <th>#</th>
                                 <th>Full Name</th>
                                 <th>Email</th>
                                 <th>Mobile No.</th>
@@ -32,8 +33,12 @@
                             </tr>
                             </thead>
                             <tbody>
+                            @php
+                                $serial = 1;
+                            @endphp
                             @foreach($drivers as $driver)
                                 <tr>
+                                    <td>{{$serial++}}</td>
                                     <td>{{$driver->full_name ?? ''}}</td>
                                     <td>{{$driver->email ?? ''}}</td>
                                     <td>{{$driver->phone_number ?? ''}}</td>
@@ -62,6 +67,7 @@
                             </tbody>
                             <tfoot>
                             <tr>
+                                <th>#</th>
                                 <th>Full Name</th>
                                 <th>Email</th>
                                 <th>Mobile No.</th>
