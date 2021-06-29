@@ -99,9 +99,11 @@
                                 <a class="dropdown-item text-danger modal-action" data-toggle="modal" data-target="#profileActionModal" data-action="decline" href="javascript:void()">Decline</a>
                                 <a class="dropdown-item text-primary modal-action" data-toggle="modal" data-target="#profileActionModal" data-action="approve" href="javascript:void()">Approve</a>
                             @endif
-                                <a class="dropdown-item text-warning modal-action" data-toggle="modal" data-target="#profileActionModal" data-action="suspend" href="javascript:void()">Suspend</a>
-                                <a class="dropdown-item modal-action" data-toggle="modal" data-target="#profileActionModal" data-action="ban" href="javascript:void()">Ban</a>
-                                <a class="dropdown-item text-success modal-action" data-toggle="modal" data-target="#profileActionModal" data-action="activate" href="javascript:void()">Activate</a>
+                                @if($user->confirmed != 0 || $user->declined != 0)
+                                    <a class="dropdown-item text-warning modal-action" data-toggle="modal" data-target="#profileActionModal" data-action="suspend" href="javascript:void()">Suspend</a>
+                                    <a class="dropdown-item modal-action" data-toggle="modal" data-target="#profileActionModal" data-action="ban" href="javascript:void()">Ban</a>
+                                    <a class="dropdown-item text-success modal-action" data-toggle="modal" data-target="#profileActionModal" data-action="activate" href="javascript:void()">Activate</a>
+                                @endif
                         </div>
                     </div>
                     <div class="profile-tab">
