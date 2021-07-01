@@ -45,7 +45,7 @@
                         <div class="col-lg-3 mb-3" style="border-left: 1px solid #ddd;">
                             <div class="mb-4">
                                 <h4 class="card-title card-intro-title mb-1 text-secondary">This Year {{date('Y')}}</h4>
-                                <p>{{number_format($wallet/*->whereYear('created_at','=', date('Y'))*/->sum('credit'),2)}}</p>
+                                <p>{{number_format($thisyear,2)}}</p>
                             </div>
                         </div>
                         <div class="col-lg-3 mb-3" style="border-left: 1px solid #ddd;">

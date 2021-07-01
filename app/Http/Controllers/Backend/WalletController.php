@@ -55,6 +55,7 @@ class WalletController extends Controller
                 'payout'=>$payout,
                 'wallet'=>$wallet,
                 'thismonth'=>$this->wallet->getThisMonthsEarningsByUserId($id),
+                'thisyear'=>$this->wallet->getThisYearsEarningsByUserId($id),
                 'policysettings'=>$this->policysettings->getPolicySettings()
                 ]);
         }else{

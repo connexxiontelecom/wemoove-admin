@@ -94,4 +94,7 @@ class Wallet extends Model
     public function getThisMonthsEarningsByUserId($id){
         return Wallet::whereMonth('created_at', date('m'))->sum('credit');
     }
+    public function getThisYearsEarningsByUserId($id){
+        return Wallet::whereYear('created_at', date('Y'))->sum('credit');
+    }
 }
