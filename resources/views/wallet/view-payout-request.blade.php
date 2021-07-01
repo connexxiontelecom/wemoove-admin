@@ -51,7 +51,7 @@
                         <div class="col-lg-3 mb-3" style="border-left: 1px solid #ddd;">
                             <div class="mb-4">
                                 <h4 class="card-title card-intro-title mb-1 text-primary">This Month</h4>
-                                <p>902229929993</p>
+                                <p>{{number_format($thismonth,2)}}</p>
                             </div>
                         </div>
                         <div class="col-lg-3 mb-3" style="border-left: 1px solid #ddd;">

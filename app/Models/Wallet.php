@@ -90,4 +90,8 @@ class Wallet extends Model
     public function getUserWalletTransactionsByUserId($id){
         return Wallet::where('user_id', $id)->orderBy('id', 'DESC')->get();
     }
+
+    public function getThisMonthsEarningsByUserId($id){
+        return Wallet::whereMonth('created_at', date('m'))->sum('credit');
+    }
 }

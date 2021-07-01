@@ -52,8 +52,9 @@ class WalletController extends Controller
 
             $wallet = $this->wallet->getUserWalletTransactionsByUserId($payout->user_id);
             return view('wallet.view-payout-request',[
-                'payout'=>$this->payout->getPayoutRequestById($id),
+                'payout'=>$payout,
                 'wallet'=>$wallet,
+                'thismonth'=>$this->wallet->getThisMonthsEarningsByUserId($id),
                 'policysettings'=>$this->policysettings->getPolicySettings()
                 ]);
         }else{
