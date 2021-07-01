@@ -35,6 +35,6 @@ class UserController extends Controller
         ]);
         $this->user->updateUserAccountStatus($request);
         session()->flash("success", "<strong>Success!</strong> Account ".$request->action);
-        return back();
+        return redirect()->route('new-registrations');
     }
 }

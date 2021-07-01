@@ -16,9 +16,6 @@
         <div class="col-lg-12">
             <div class="profile card card-body px-3 pt-3 pb-0">
                 <div class="profile-head">
-                    <div class="photo-content">
-                        <div class="cover-photo"></div>
-                    </div>
                     <div class="profile-info">
                         <div class="profile-photo">
                             <img src="{{$assets["user"]["profile_image"]}}" class="img-fluid rounded-circle" alt="">
@@ -52,6 +49,7 @@
                                     <h3 class="m-b-0">{{number_format($user->getDriverRides->count())}}</h3>
                                     <span>Rides</span>
                                 </div>
+                                @if($user->user_type == 1)
                                 <div class="col">
                                     <h3 class="m-b-0">0</h3>
                                     <span>Passengers</span>
@@ -60,6 +58,7 @@
                                     <h3 class="m-b-0">{{number_format($user->getDriverReviews->count())}}</h3>
                                     <span>Reviews</span>
                                 </div>
+                                @endif
                             </div>
                         </div>
 
@@ -92,6 +91,7 @@
         <div class="col-xl-8">
             <div class="card">
                 <div class="card-body">
+                    @if($user->user_type == 1)
                     <div class="btn-group float-right" role="group">
                         <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Account Operations</button>
                         <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 56px, 0px);">
@@ -106,6 +106,7 @@
                                 @endif
                         </div>
                     </div>
+                    @endif
                     <div class="profile-tab">
                         <div class="custom-tab-1">
                             <ul class="nav nav-tabs">

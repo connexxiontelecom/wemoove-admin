@@ -28,7 +28,7 @@
                                 <th>Departure Time</th>
                                 <th>Amount</th>
                                 <th>Destination</th>
-                                <th>Capacity</th>
+                                <th>Passenger</th>
                                 <th>Status</th>
                                 <th>Action</th>
                             </tr>
@@ -42,7 +42,7 @@
                                     <td>{{$serial++}}</td>
                                     <td>{{$ride->getDriver->full_name ?? ''}}</td>
                                     <td>{{$ride->departure_time ?? ''}}</td>
-                                    <td>{{$ride->amount ?? ''}}</td>
+                                    <td class="text-right">{{$ride->amount ?? ''}}</td>
                                     <td>{{$ride->destination ?? ''}}</td>
                                     <td>{{$ride->capacity ?? ''}}</td>
                                     <td>
@@ -57,7 +57,7 @@
                                             <label for="" class="label label-danger">Cancelled</label>
                                             @break
                                             @case(4)
-                                            <label for="" class="label label-success">Done</label>
+                                            <label for="" class="label label-success">Finished</label>
                                             @break
                                         @endswitch
                                     </td>
@@ -236,7 +236,7 @@
                                 <th>Departure Time</th>
                                 <th>Amount</th>
                                 <th>Destination</th>
-                                <th>Capacity</th>
+                                <th>Passenger</th>
                                 <th>Status</th>
                                 <th>Action</th>
                             </tr>
