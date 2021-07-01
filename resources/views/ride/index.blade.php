@@ -48,16 +48,16 @@
                                     <td>
                                         @switch($ride->status)
                                             @case(1)
-                                            Pending
+                                            <label for="" class="label label-secondary text-white">Pending</label>
                                             @break
                                             @case(2)
-                                            In-progress
+                                            <label for="" class="label label-warning">In-progress</label>
                                             @break
                                             @case(3)
-                                            Cancelled
+                                            <label for="" class="label label-danger">Cancelled</label>
                                             @break
                                             @case(4)
-                                            Done
+                                            <label for="" class="label label-success">Done</label>
                                             @break
                                         @endswitch
                                     </td>
@@ -188,8 +188,32 @@
                                                                                     <td>{{$s++}}</td>
                                                                                     <td>{{$pass->getUser->full_name ?? ''}}</td>
                                                                                     <td>{{$pass->pickup ?? ''}}</td>
-                                                                                    <td>{{$pass->request_status ?? ''}}</td>
-                                                                                    <td>{{$pass->passenger_ride_status ?? ''}}</td>
+                                                                                    <td>
+                                                                                        @switch($pass->request_status)
+                                                                                            @case(1)
+                                                                                            <label for="" class="label label-secondary">Pending</label>
+                                                                                            @break
+                                                                                            @case(2)
+                                                                                            <label for="" class="label label-success">Accepted</label>
+                                                                                            @break
+                                                                                            @case(3)
+                                                                                            <label for="" class="label label-danger">Declined</label>
+                                                                                            @break
+                                                                                        @endswitch
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        @switch($pass->passenger_ride_status)
+                                                                                            @case(1)
+                                                                                            <label for="" class="label label-secondary">Pending</label>
+                                                                                            @break
+                                                                                            @case(2)
+                                                                                            <label for="" class="label label-success">Accepted</label>
+                                                                                            @break
+                                                                                            @case(3)
+                                                                                            <label for="" class="label label-danger">Declined</label>
+                                                                                            @break
+                                                                                        @endswitch
+                                                                                    </td>
                                                                                 </tr>
                                                                             @endforeach
                                                                         </table>
