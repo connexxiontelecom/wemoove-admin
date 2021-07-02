@@ -13,7 +13,7 @@
 
 @section('main-content')
     <div class="row">
-        <div class="col-12">
+        <div class="col-6 offset-md-3">
             <div class="card">
                 <div class="card-header">
                     <h4 class="card-title">Credit Wallet</h4>
@@ -29,21 +29,18 @@
                     @endif
                     <div class="row">
                         <div class="col-xl-12 col-xxl-12 col-sm-12">
-                            <form action="{{route('credit-wallet')}}" method="post">
+                            <form action="{{route('credit-wallet')}}" method="post" autocomplete="off">
                                 @csrf
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <label for="">Select Account</label>
-                                            <select name="account" id="account" class="form-control">
-                                                <option selected disabled>--Select Account--</option>
-                                                @foreach($users as $user)
-                                                    <option value="{{$user->id}}">{{$user->full_name ?? ''}}</option>
-                                                @endforeach
-                                            </select>
+                                            <label for="">Enter User Mobile No.</label>
+                                            <input type="number" id="account" name="account" placeholder="Enter user mobile no." class="form-control">
                                             @error('account')
                                                 <i class="text-danger">{{$message}}</i>
                                             @enderror
+                                            <i class="text-danger" id="error"></i>
+                                            <i class="text-success" id="success"></i>
                                         </div>
                                     </div>
                                     <div class="col-md-12">
@@ -60,8 +57,8 @@
                                 <div class="row">
                                     <div class="col-md-12 d-flex justify-content-center">
                                         <div class="btn-group">
-                                            <a href="{{url()->previous()}}" class="btn btn-secondary btn-sm">Cancel</a>
-                                            <button class="btn btn-sm btn-primary" type="submit">Submit</button>
+                                            <a href="{{url()->previous()}}" class="btn text-white btn-secondary btn-sm">Cancel</a>
+                                            <button class="btn btn-sm btn-primary" id="submit-btn" type="submit">Submit</button>
                                         </div>
                                     </div>
                                 </div>
@@ -72,4 +69,38 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('extra-scripts')
+    <script>
+        $(document).ready(function(){
+            var account = null;
+            $('#error').hide();
+            $('#success').hide();
+            $('#submit-btn').hide();
+            $(document).on('blur', '#account', function(e){
+                account = $(this).val();
+                if(account != null){
+                    axios.post('/transactions/check-account', {account:account})
+                    .then(response=>{
+                        if(response.data.error){
+                            $('#error').text("No record found.");
+                            $('#success').hide();
+                            $('#submit-btn').hide();
+                            $('#error').show();
+                        }else{
+                            $('#success').text("Account does exist.");
+                            $('#error').hide();
+                            $('#submit-btn').show();
+                            $('#success').show();
+                        }
+
+                    })
+                    .catch(error=>{
+
+                    });
+                }
+            });
+        });
+    </script>
 @endsection

@@ -6,7 +6,7 @@
 <script src="/js/plugins-init/datatables.init.js" type="text/javascript"></script>
 <script src="/js/custom.min.js" type="text/javascript"></script>
 <script src="/js/deznav-init.js" type="text/javascript"></script>
-
+<script src="/js/axios.min.js"></script>
 @yield('extra-scripts')
 </body>
 

@@ -22,12 +22,12 @@ class Wallet extends Model
     /*
      * use-case methods
      */
-    public function creditWallet(Request $request){
+    public function creditWallet(Request $request, $user){
         $wallet = new Wall();
         $wallet->credit = $request->amount ?? 0;
         $wallet->debit = 0;
         $wallet->narration = Auth::user()->first_name." credited wallet";
-        $wallet->user_id = $request->account;
+        $wallet->user_id = $user->id;
         $wallet->save();
         #Notification
         $this->ToSpecificUser("Wallet credited", "Your wallet was credited with the sum of ".$request->amount, $request->account);

@@ -38,7 +38,7 @@
                     <span class="nav-text">Transaction</span>
                 </a>
                 <ul aria-expanded="false">
-                    <li><a href="{{route('wallet-dashboard')}}">Recent Transactions</a></li>
+                    <li><a href="{{route('wallet-dashboard')}}">Transactions</a></li>
                     <li><a href="{{route('wallet')}}">Customer's Wallet</a></li>
                     <li><a href="{{route('credit-wallet')}}">Credit Wallet</a></li>
                     <li><a href="#">Refund</a></li>

@@ -35,7 +35,7 @@ class WalletController extends Controller
             'account'=>'required',
             'amount'=>'required'
         ]);
-        $this->wallet->creditWallet($request);
+        $this->wallet->creditWallet($request, $this->users->getUserByPhoneNumber($request->account));
         session()->flash("success", "<strong>Success!</strong> Account credited.");
         return back();
     }
@@ -93,5 +93,19 @@ class WalletController extends Controller
             session()->flash("error", "<strong>Whoops!</strong> No record found.");
             return back();
         }
+    }
+
+    public function checkAccount(Request $request){
+        $this->validate($request,[
+            'account'=>'required'
+        ]);
+        $status = $this->users->checkUserAccountByPhoneNumber($request);
+        if($status == 0){
+            //$account = $this->users->checkUserAccountByPhoneNumber($request);
+            return response()->json(['error'=>'No record found.']);
+        }else{
+            return response()->json(['success'=>'Account does exist.'],200);
+        }
+
     }
 }

@@ -131,9 +131,22 @@ class User extends Authenticatable
 
     }
 
+    public function getUserByPhoneNumber($number){
+        return User::where('phone_number', $number)->first();
+    }
+
     public function getUserWalletBalanceById($id){
         $debit = Wallet::where('user_id', $id)->sum('debit');
         $credit = Wallet::where('user_id', $id)->sum('credit');
         return $credit - $debit;
+    }
+
+    public function checkUserAccountByPhoneNumber(Request $request){
+        $account = User::where('phone_number', $request->account)->first();
+        if(!empty($account)){
+            return 1; //exists
+        }else{
+            return 0;//no record
+        }
     }
 }

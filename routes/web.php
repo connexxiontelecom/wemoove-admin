@@ -57,6 +57,7 @@ Route::prefix('transactions')->group(function(){
     Route::get('/wallet', [App\Http\Controllers\Backend\WalletController::class, 'wallet'])->name('wallet');
     Route::get('/customer-ledger/{id}', [App\Http\Controllers\Backend\WalletController::class, 'customerLedger'])->name('customer-ledger');
     Route::get('/credit-wallet', [App\Http\Controllers\Backend\WalletController::class, 'creditWallet'])->name('credit-wallet');
+    Route::post('/check-account', [App\Http\Controllers\Backend\WalletController::class, 'checkAccount']);
     Route::post('/credit-wallet', [App\Http\Controllers\Backend\WalletController::class, 'storeCreditWallet']);
     Route::get('/payout-requests', [App\Http\Controllers\Backend\WalletController::class, 'showPayoutRequests'])->name('payout-requests');
     Route::get('/payout-requests/{requestid}', [App\Http\Controllers\Backend\WalletController::class, 'viewPayoutRequest'])->name('view-payout-request');

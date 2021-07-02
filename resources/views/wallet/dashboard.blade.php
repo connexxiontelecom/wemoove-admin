@@ -32,7 +32,7 @@
 									</span>
                                         <div class="media-body text-right">
                                             <p class="fs-18 text-white mb-2">Revenue</p>
-                                            <span class="fs-48 text-white font-w600">{{number_format($wallet->sum('debit') - $wallet->sum('credit'),2)}}</span>
+                                            <span class="fs-48 text-white font-w600">{{number_format($wallet->where('commission',1)->sum('debit'),2)}}</span>
                                         </div>
                                     </div>
                                 </div>
@@ -51,7 +51,7 @@
 									</span>
                                         <div class="media-body text-right">
                                             <p class="fs-18 text-white mb-2">Expenses</p>
-                                            <span class="fs-48 text-white font-w600">0</span>
+                                            <span class="fs-48 text-white font-w600">{{number_format($wallet->where('payout',1)->sum('debit'),2)}}</span>
                                         </div>
                                     </div>
                                 </div>
@@ -93,43 +93,42 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-12 mt-4">
-                            <h5>Recent Transactions</h5>
-                            <div class="table-responsive">
-                                <table id="example" class="display table-responsive-md">
-                                    <thead>
-                                    <tr>
-                                        <th>S/No.</th>
-                                        <th>Name</th>
-                                        <th>Debit</th>
-                                        <th>Credit</th>
-                                        <th>Narration</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    @php
-                                        $serial = 1;
-                                    @endphp
-                                    @foreach($wallet as $wall)
-                                        <tr>
-                                            <td>{{$serial++}}</td>
-                                            <td>{{$wall->getUser->full_name ?? ''}}</td>
-                                            <td class="text-right">{{$wall->debit > 0 ? number_format($wall->debit,2) : '-'}}</td>
-                                            <td class="text-right">{{$wall->credit > 0 ? number_format($wall->credit,2) : '-'}}</td>
-                                            <td>{{$wall->narration ?? '-'}}</td>
-                                        </tr>
-                                    @endforeach
-                                    </tbody>
-                                    <tfoot>
-                                    <tr>
-                                        <th>S/No.</th>
-                                        <th>Name</th>
-                                        <th>Debit</th>
-                                        <th>Credit</th>
-                                        <th>Narration</th>
-                                    </tr>
-                                    </tfoot>
-                                </table>
+                        <div class="col-lg-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4 class="card-title">Recent Transactions</h4>
+                                </div>
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table class="table table-responsive-md">
+                                            <thead>
+                                            <tr>
+                                                <th class="width80"><strong>#</strong></th>
+                                                <th><strong>Date</strong></th>
+                                                <th><strong>Name</strong></th>
+                                                <th><strong>Debit</strong></th>
+                                                <th><strong>Credit</strong></th>
+                                                <th><strong>Narration</strong></th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            @php
+                                                $serial = 1;
+                                            @endphp
+                                            @foreach($wallet->take(10) as $wall)
+                                                <tr>
+                                                    <td>{{$serial++}}</td>
+                                                    <td>{{date('d M, Y', strtotime($wall->created_at))}}</td>
+                                                    <td>{{$wall->getUser->full_name ?? ''}}</td>
+                                                    <td class="text-right">{{$wall->debit > 0 ? number_format($wall->debit,2) : '-'}}</td>
+                                                    <td class="text-right">{{$wall->credit > 0 ? number_format($wall->credit,2) : '-'}}</td>
+                                                    <td>{{$wall->narration ?? '-'}}</td>
+                                                </tr>
+                                            @endforeach
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
