@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Rating extends Model
 {
     use HasFactory;
+
+
+    public function getUser(){
+        return $this->belongsTo(User::class, 'passenger_id');
+    }
 }

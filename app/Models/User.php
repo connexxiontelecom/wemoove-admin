@@ -56,6 +56,10 @@ class User extends Authenticatable
         return $this->hasMany(Vehicle::class, 'driver_id');
     }
 
+    public function getUserReviews(){
+        return $this->hasMany(Rating::class, 'driver_id');
+    }
+
 
 
 
@@ -149,4 +153,6 @@ class User extends Authenticatable
             return 0;//no record
         }
     }
+
+
 }

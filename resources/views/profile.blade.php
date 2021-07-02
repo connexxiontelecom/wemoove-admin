@@ -116,6 +116,11 @@
                                 <li class="nav-item">
                                     <a href="#about-me" data-toggle="tab" class="nav-link">Rides</a>
                                 </li>
+                                @if($user->user_type == 1)
+                                <li class="nav-item">
+                                    <a href="#reviews" data-toggle="tab" class="nav-link">Reviews</a>
+                                </li>
+                                @endif
                             </ul>
                             <div class="tab-content">
                                 <div id="my-posts" class="tab-pane fade active show">
@@ -290,7 +295,7 @@
                                                                                         </div>
                                                                                         <div class="row mb-4 mb-sm-2">
                                                                                             <div class="col-sm-3">
-                                                                                                <h5 class="f-w-500">Capacity
+                                                                                                <h5 class="f-w-500">Passengers
                                                                                                     <span class="pull-right d-none d-sm-block">:</span>
                                                                                                 </h5>
                                                                                             </div>
@@ -305,7 +310,22 @@
                                                                                                 </h5>
                                                                                             </div>
                                                                                             <div class="col-sm-9">
-                                                                                                <span>{{$ride->status ?? ''}}</span>
+                                                                                                <span>
+                                                                                                   @switch($ride->status)
+                                                                                                        @case(1)
+                                                                                                        <label for="" class="label label-warning">Pending</label>
+                                                                                                        @break
+                                                                                                        @case(2)
+                                                                                                        <label for="" class="label label-primary">In-progress</label>
+                                                                                                        @break
+                                                                                                        @case(3)
+                                                                                                        <label for="" class="label label-danger">Cancelled</label>
+                                                                                                        @break
+                                                                                                        @case(4)
+                                                                                                        <label for="" class="label label-success">Finished</label>
+                                                                                                        @break
+                                                                                                    @endswitch
+                                                                                                </span>
                                                                                             </div>
                                                                                         </div>
                                                                                         <div class="row mb-4 mb-sm-2">
@@ -319,15 +339,16 @@
                                                                                             </div>
                                                                                         </div>
                                                                                     </div>
-                                                                                    <div id="passengers_{{$ride->id}}" data-toggle="tab" class="nav-link">
+                                                                                    <div id="passengers_{{$ride->id}}" data-toggle="tab" class="tab-pane nav-link">
                                                                                         <div class="table-responsive">
                                                                                             <table class="table table-bordered table-striped">
                                                                                                 <tr>
                                                                                                     <th>S/No.</th>
+                                                                                                    <th>Date</th>
                                                                                                     <th>Name</th>
+                                                                                                    <th>Offer</th>
                                                                                                     <th>Pickup</th>
                                                                                                     <th>Request</th>
-                                                                                                    <th>Ride</th>
                                                                                                 </tr>
                                                                                                 @php
                                                                                                     $serial = 1;
@@ -335,10 +356,23 @@
                                                                                                 @foreach($ride->getRidePassengers as $pass)
                                                                                                     <tr>
                                                                                                         <td>{{$serial++}}</td>
+                                                                                                        <td>{{date('d-m-Y', strtotime($pass->created_at))}}</td>
                                                                                                         <td>{{$pass->getUser->full_name ?? ''}}</td>
+                                                                                                        <td class="text-right">{{number_format($pass->negotiated == 0 ? $ride->amount : $pass->fare,2)}}</td>
                                                                                                         <td>{{$pass->pickup ?? ''}}</td>
-                                                                                                        <td>{{$pass->request_status ?? ''}}</td>
-                                                                                                        <td>{{$pass->passenger_ride_status ?? ''}}</td>
+                                                                                                        <td>
+                                                                                                            @switch($pass->request_status)
+                                                                                                                @case(1)
+                                                                                                                <label for="" class="label label-secondary">Pending</label>
+                                                                                                                @break
+                                                                                                                @case(2)
+                                                                                                                <label for="" class="label label-success">Accepted</label>
+                                                                                                                @break
+                                                                                                                @case(3)
+                                                                                                                <label for="" class="label label-danger">Declined</label>
+                                                                                                                @break
+                                                                                                            @endswitch
+                                                                                                        </td>
                                                                                                     </tr>
                                                                                                 @endforeach
                                                                                             </table>
@@ -367,7 +401,28 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="tab-pane fade" id="reviews">
+                                    <ul class="timeline mt-5">
+                                        @php
+                                            $serial = 1;
+                                        @endphp
+                                        @if($user->getUserReviews->count() > 0)
+                                            @foreach($user->getUserReviews as $review)
+                                            <li style="border-bottom: 1px solid #e6defa;" class="mb-3">
+                                                <div class="timeline-panel">
+                                                    <div class="media-body">
+                                                        <h5 class="mb-1"> <span class="badge badge-info">{{$serial++}}</span>  {{$review->getUser->full_name ?? ''}} <small class="text-muted">{{date('d M, Y', strtotime($review->created_at))}}</small></h5>
+                                                        <p class="mb-1">{{$review->comments ?? ''}}</p>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            @endforeach
+                                        @else
+                                            <h5 class="text-muted text-center mt-4">There're currently no reviews for this user.</h5>
+                                        @endif
 
+                                    </ul>
+                                </div>
                             </div>
                         </div>
                     </div>
