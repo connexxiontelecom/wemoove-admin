@@ -78,4 +78,20 @@ class WalletController extends Controller
 
         return view('wallet.wallet',['users'=>$this->users->getAllDrivers()]);
     }
+
+    public function customerLedger($id){
+        $user = $this->users->getUserOnlyById($id);
+        if(!empty($user)){
+            $wallet = $this->wallet->getUserWalletTransactionsByUserId($id);
+            return view('wallet.customer-ledger',[
+                'wallet'=>$wallet,
+                'thismonth'=>$this->wallet->getThisMonthsEarningsByUserId($id),
+                'thisyear'=>$this->wallet->getThisYearsEarningsByUserId($id),
+                'user'=>$user
+                ]);
+        }else{
+            session()->flash("error", "<strong>Whoops!</strong> No record found.");
+            return back();
+        }
+    }
 }

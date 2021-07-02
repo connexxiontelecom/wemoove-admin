@@ -46,7 +46,7 @@
                                             <td>{{$user->email ?? ''}}</td>
                                             <td class="text-right">{{number_format($user->getUserWalletBalanceById($user->id),2)}}</td>
                                             <td>
-                                                <a href="" class="btn btn-primary btn-sm">View</a>
+                                                <a href="{{route('customer-ledger', $user->id)}}" class="btn btn-primary btn-sm">View</a>
                                             </td>
                                         </tr>
                                     @endforeach
