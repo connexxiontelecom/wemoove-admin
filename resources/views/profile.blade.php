@@ -411,7 +411,7 @@
                                             <li style="border-bottom: 1px solid #e6defa;" class="mb-3">
                                                 <div class="timeline-panel">
                                                     <div class="media-body">
-                                                        <h5 class="mb-1"> <span class="badge badge-info">{{$serial++}}</span>  {{$review->getUser->full_name ?? ''}} <small class="text-muted">{{date('d M, Y', strtotime($review->created_at))}}</small></h5>
+                                                        <h5 class="mb-1"> <span class="badge badge-info" style="border-radius:50%;">{{$serial++}}</span>  {{$review->getUser->full_name ?? ''}} <small class="text-muted">{{date('d M, Y', strtotime($review->created_at))}}</small></h5>
                                                         <p class="mb-1">{{$review->comments ?? ''}}</p>
                                                     </div>
                                                 </div>
