@@ -24,6 +24,7 @@
                             <thead>
                             <tr>
                                 <th>S/No.</th>
+                                <th>Date</th>
                                 <th>Driver</th>
                                 <th>Departure Time</th>
                                 <th>Amount</th>
@@ -40,6 +41,7 @@
                             @foreach($rides as $ride)
                                 <tr>
                                     <td>{{$serial++}}</td>
+                                    <td>{{date('d-m-Y', strtotime($ride->created_at))}}</td>
                                     <td>{{$ride->getDriver->full_name ?? ''}}</td>
                                     <td>{{$ride->departure_time ?? ''}}</td>
                                     <td class="text-right">{{$ride->amount ?? ''}}</td>
@@ -141,7 +143,7 @@
                                                                     </div>
                                                                     <div class="row mb-4 mb-sm-2">
                                                                         <div class="col-sm-3">
-                                                                            <h5 class="f-w-500">Capacity
+                                                                            <h5 class="f-w-500">Passengers
                                                                                 <span class="pull-right d-none d-sm-block">:</span>
                                                                             </h5>
                                                                         </div>
@@ -156,7 +158,22 @@
                                                                             </h5>
                                                                         </div>
                                                                         <div class="col-sm-9">
-                                                                            <span>{{$ride->status ?? ''}}</span>
+                                                                            <span>
+                                                                                @switch($ride->status)
+                                                                                    @case(1)
+                                                                                    <label for="" class="label label-warning">Pending</label>
+                                                                                    @break
+                                                                                    @case(2)
+                                                                                    <label for="" class="label label-primary">In-progress</label>
+                                                                                    @break
+                                                                                    @case(3)
+                                                                                    <label for="" class="label label-danger">Cancelled</label>
+                                                                                    @break
+                                                                                    @case(4)
+                                                                                    <label for="" class="label label-success">Finished</label>
+                                                                                    @break
+                                                                                @endswitch
+                                                                            </span>
                                                                         </div>
                                                                     </div>
                                                                     <div class="row mb-4 mb-sm-2">
@@ -170,7 +187,7 @@
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                                <div id="passengers_{{$ride->id}}" data-toggle="tab" class="nav-link">
+                                                                <div id="passengers_{{$ride->id}}" data-toggle="tab" class="nav-link tab-pane">
                                                                     <div class="table-responsive">
                                                                         <table class="table table-bordered table-striped">
                                                                             <tr>
@@ -178,7 +195,6 @@
                                                                                 <th>Name</th>
                                                                                 <th>Pickup</th>
                                                                                 <th>Request</th>
-                                                                                <th>Ride</th>
                                                                             </tr>
                                                                             @php
                                                                                 $s = 1;
@@ -190,19 +206,6 @@
                                                                                     <td>{{$pass->pickup ?? ''}}</td>
                                                                                     <td>
                                                                                         @switch($pass->request_status)
-                                                                                            @case(1)
-                                                                                            <label for="" class="label label-secondary">Pending</label>
-                                                                                            @break
-                                                                                            @case(2)
-                                                                                            <label for="" class="label label-success">Accepted</label>
-                                                                                            @break
-                                                                                            @case(3)
-                                                                                            <label for="" class="label label-danger">Declined</label>
-                                                                                            @break
-                                                                                        @endswitch
-                                                                                    </td>
-                                                                                    <td>
-                                                                                        @switch($pass->passenger_ride_status)
                                                                                             @case(1)
                                                                                             <label for="" class="label label-secondary">Pending</label>
                                                                                             @break
@@ -232,6 +235,7 @@
                             <tfoot>
                             <tr>
                                 <th>S/No.</th>
+                                <th>Date</th>
                                 <th>Driver</th>
                                 <th>Departure Time</th>
                                 <th>Amount</th>
