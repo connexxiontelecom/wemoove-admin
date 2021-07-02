@@ -97,4 +97,6 @@ class Wallet extends Model
     public function getThisYearsEarningsByUserId($id){
         return Wallet::where('user_id', $id)->whereYear('created_at', date('Y'))->sum('credit');
     }
+
+
 }

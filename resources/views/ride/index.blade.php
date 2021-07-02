@@ -29,7 +29,7 @@
                                 <th>Departure Time</th>
                                 <th>Amount</th>
                                 <th>Destination</th>
-                                <th>Passenger</th>
+                                <th>Passengers</th>
                                 <th>Status</th>
                                 <th>Action</th>
                             </tr>
@@ -192,7 +192,9 @@
                                                                         <table class="table table-bordered table-striped">
                                                                             <tr>
                                                                                 <th>S/No.</th>
+                                                                                <th>Date</th>
                                                                                 <th>Name</th>
+                                                                                <th>Offer</th>
                                                                                 <th>Pickup</th>
                                                                                 <th>Request</th>
                                                                             </tr>
@@ -202,7 +204,9 @@
                                                                             @foreach($ride->getRidePassengers as $pass)
                                                                                 <tr>
                                                                                     <td>{{$s++}}</td>
+                                                                                    <td>{{date('d-m-Y', strtotime($pass->created_at))}}</td>
                                                                                     <td>{{$pass->getUser->full_name ?? ''}}</td>
+                                                                                    <td class="text-right">{{number_format($pass->negotiated == 0 ? $ride->amount : $pass->fare,2)}}</td>
                                                                                     <td>{{$pass->pickup ?? ''}}</td>
                                                                                     <td>
                                                                                         @switch($pass->request_status)
@@ -240,7 +244,7 @@
                                 <th>Departure Time</th>
                                 <th>Amount</th>
                                 <th>Destination</th>
-                                <th>Passenger</th>
+                                <th>Passengers</th>
                                 <th>Status</th>
                                 <th>Action</th>
                             </tr>

@@ -73,4 +73,9 @@ class WalletController extends Controller
         session()->flash("success", "<strong>Success!</strong> Payout request status updated.");
         return back();
     }
+
+    public function wallet(){
+
+        return view('wallet.wallet',['users'=>$this->users->getAllDrivers()]);
+    }
 }

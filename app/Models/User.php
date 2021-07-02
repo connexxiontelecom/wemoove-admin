@@ -130,4 +130,10 @@ class User extends Authenticatable
         }
 
     }
+
+    public function getUserWalletBalanceById($id){
+        $debit = Wallet::where('user_id', $id)->sum('debit');
+        $credit = Wallet::where('user_id', $id)->sum('credit');
+        return $credit - $debit;
+    }
 }
